@@ -9,6 +9,8 @@ if "y" not in play.lower():
     print("Ok, bye!")
     exit(1)
 
+# Game Board:
+#
 # 0 | 1 | 2
 # ---------
 # 3 | 4 | 5

@@ -12,7 +12,7 @@ I decided to do this challenge in Python since that is the language I've been us
 
 ## My Attempt
 
-I didn't give much thought into this challenge when I chose to do it, but I wanted these challenges to be fairly quick and therefore, text based.  When I went to start typing code, I realized I would have to put some thought into how to play TTT in text form.
+I didn't give much thought into this challenge when I chose to do it, but I wanted these challenges to be fairly quick and therefore, text based.  When I went to start typing code, I realized I would have to put some thought into how to play Tic Tac Toe in text form.
 
 I first started thinking about the data structure to hold the game board.  Originally, I was thinking of creating a two dimensional array since that would be most similar to an actual Tic Tac Toe game board.  However, after a few lines of code I decided it would probably be easier to represent this in just a one dimensional array.  So I created an array for the game board that would originally hold the position number, but eventually will hold the player character when a play is made.  I also created a list of arrays that represent winning sequences based on that board.
 
@@ -102,7 +102,7 @@ So while no one had won, we do the following:
  - check if that play was a winning play
  - increment the count and repeat the while command
 
-This code worked, unless if no one won.  We need to handle the possibility of a draw.  The way I handled this problem is to use the count variable that tracks the number of plays.  The maximum number of plays for a TTT game is 9.  If no one has won after 9 turns (or 8 if counting from 0), then the game is a draw.  So this requires us to send the count variable to the checkForWin() function and make the following changes:
+This code worked, unless if no one won.  We need to handle the possibility of a draw.  The way I handled this problem is to use the count variable that tracks the number of plays.  The maximum number of plays for a Tic Tac Toe game is 9.  If no one has won after 9 turns (or 8 if counting from 0), then the game is a draw.  So this requires us to send the count variable to the checkForWin() function and make the following changes:
 
 <code>
 def checkForWin(count):

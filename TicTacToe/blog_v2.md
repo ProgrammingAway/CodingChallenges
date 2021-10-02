@@ -4,7 +4,7 @@ Shortly after writing a [Tic Tac Toe program](https://programmingaway.com/tic-ta
 
 So the first thing I did was make the game board size a variable that can be controlled by the user.  Now we aren't stuck with a 3x3 board, however, this would require us to re-write most of the functions since they were hardcoded to use a 3x3 board.  The first thing I needed to do is to create a initializeBoard function that created a 2 dimensional array based off the boardSize variable.
 
-<code>
+<pre>
 def initializeBoard(boardSize):
     # Creates a 2 dimentional martix of boardSize
     board = []
@@ -14,11 +14,11 @@ def initializeBoard(boardSize):
             column.append(None)
         board.append(column)
     return board
-</code>
+</pre>
 
 The next thing I did was update the printBoard function to use this new board.  
 
-<code>
+<pre>
 def printBoard(board):
     # Prints the current state of the board
     rowIndex = 0
@@ -47,13 +47,13 @@ def printBoard(board):
         print(boardRow2)
         rowIndex += 1
     print()
-</code>
+</pre>
 
 I will have to put some practical limit on the board size to keep the game managable, but I wanted the printBoard function to be able to hangle a large size board.  I added conditionals that tested if there are more than 10 or 100 positions on the board so I can add proper spacing and everything would line up.  But I did think testing anything bigger than that would make the board too big and make the game too hard to play.  However, I may be able to accomplish this by using some print formatting.  I will look into that.
 
 I could have used the same method of checking for a draw as my old program, but I decided to give it it's dedicated function and actually test for any empty spaces on the board.  Hopefully this is more robust.
 
-<code>
+<pre>
 def checkForDraw(board):
     # Checks to see if there are any empty spaces on the board
     # If not, it is a draw
@@ -62,8 +62,46 @@ def checkForDraw(board):
             if col is None:
                 return False
     return True
-</code>
+</pre>
 
+Next I will update the checkForWin function.  Since the size of the board is parameterized, I cannot store a list of all winning combinations before hand.  I will need to create a list dynamically based off the size chosen by the user.  In order to not calculate this every time I check for a win, I will call a function after the board size is chosen and send the resulting list to the checkForWin function.  So first, this is the function to create all possible winning combinations.
 
+<pre>
+def winningSequences(boardSize):
+    # Return all the sequences that can win the game
+    colSequences = []
+    rowSequences = []
+    for a in range(boardSize):
+        col = []
+        row = []
+        for b in range(boardSize):
+            col.append((a, b))
+            row.append((b, a))
+        colSequences.append(col)
+        rowSequences.append(row)
 
+    diagSequences = []
+    diag1 = []
+    diag2 = []
+    for x in range(boardSize):
+        diag1.append((x, x))
+        diag2.append((x, boardSize-1-x))
+    diagSequences.append(diag1)
+    diagSequences.append(diag2)
 
+    return colSequences + rowSequences + diagSequences
+</pre>
+
+Now this is the resulting checkForWin function.
+
+<pre>
+def checkForWin(board, winningSequencesList):
+    # Check if either player has won the game
+    for seq in winningSequencesList:
+        boardValues = []
+        for (x, y) in seq:
+            boardValues.append(board[x][y])
+        if len(set(boardValues)) == 1 and boardValues[0] is not None:
+            return True
+    return False
+</pre>

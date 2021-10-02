@@ -17,7 +17,7 @@ I didn't give much thought into this challenge when I chose to do it, but I want
 I first started thinking about the data structure to hold the game board.  Originally, I was thinking of creating a two dimensional array since that would be most similar to an actual Tic Tac Toe game board.  However, after a few lines of code I decided it would probably be easier to represent this in just a one dimensional array.  So I created an array for the game board that would originally hold the position number, but eventually will hold the player character when a play is made.  I also created a list of arrays that represent winning sequences based on that board.
 
 Here are the global variables I set up:
-<code>
+<pre>
 # Game Board:
 #
 # 0 | 1 | 2
@@ -29,13 +29,13 @@ Here are the global variables I set up:
 board = [0, 1, 2, 3, 4, 5, 6, 7, 8]
 winningSequences = ([0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 1, 2],
                     [3, 4, 5], [6, 7, 8], [0, 4, 8], [2, 4, 6])
-</code>
+</pre>
 
 So if you think of the board variable as defining the places of the board represented in the comments, then you can define the limited set of winning sequences.
 
 I then created a printBoard() function that does just what you think it does, prints out the game board:
 
-<code>
+<pre>
 def printBoard():
     # Prints the current state of the board
     print()
@@ -45,11 +45,11 @@ def printBoard():
     print("---------")
     print(str(board[6]) + " | " + str(board[7]) + " | " + str(board[8]))
     print()
-</code>
+</pre>
 
 I also wanted to create a function to check if the current move wins the game since this function would be called after every move.  Since I plan on replacing the initial number in the board array with the player character, I need to test if all the indexes in the winning sequence equal the same character.  Then if that character equals X, player X wins, otherwise player O wins.  Here's the code I came up with:
 
-<code>
+<pre>
 def checkForWin():
     # Checks the board for a winning sequence
     for sequence in winningSequences:
@@ -62,13 +62,13 @@ def checkForWin():
                 print("Player 'O' won!!")
                 return 1
     return 0
-</code>
+</pre>
 
 This code will return 1 if a player won, and 0 if the game is to continue.
 
 Finally I started creating code to play the game.  Here is what I started with:
 
-<code>
+<pre>
 play = input("Would you like to play Tic Tac Toe? (Y/N) ")
 
 if "y" not in play.lower():
@@ -90,7 +90,7 @@ while win == 0:  # =1 for win, =0 to continue play
     board[move] = player
     win = checkForWin()
     count = count + 1
-</code>
+</pre>
 
 So while no one had won, we do the following:
  - print the board, 
@@ -104,7 +104,7 @@ So while no one had won, we do the following:
 
 This code worked, unless if no one won.  We need to handle the possibility of a draw.  The way I handled this problem is to use the count variable that tracks the number of plays.  The maximum number of plays for a Tic Tac Toe game is 9.  If no one has won after 9 turns (or 8 if counting from 0), then the game is a draw.  So this requires us to send the count variable to the checkForWin() function and make the following changes:
 
-<code>
+<pre>
 def checkForWin(count):
     # Checks the board for a winning sequence
     # Also checks if there are no more moves and calls a draw
@@ -122,13 +122,13 @@ def checkForWin(count):
                 print("Player 'O' won!!")
                 return 1
     return 0
-</code>
+</pre>
 
 Be sure to change the call to checkForWin() in the while function to send the count variable.  
 
 Now the game worked, but there was no way to continue to play the game without running the program again.  In order to play the game multiple times, we would need to put that while loop into it's own function.  So I created the playGame() funciton:
 
-<code>
+<pre>
 def playGame():
     # while there is not a win or draw, then ask the player for the next move
     win = 0
@@ -146,13 +146,13 @@ def playGame():
         board[move] = player
         win = checkForWin(count)
         count = count + 1
-</code>
+</pre>
 
 After creating the playGame() function, the complete code would be as follows:
 
-<code>
+<pre>
 Full code
-</code>
+</pre>
 
 So that is how I solved the Tic Tac Toe programming challenge in Python.  Let me know if you solved it in a different way in the comments below.
 

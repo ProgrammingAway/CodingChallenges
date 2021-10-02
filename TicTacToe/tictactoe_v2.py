@@ -109,28 +109,40 @@ def checkForDraw(board):
     return True
 
 
-def playGame(board, boardSize, winningSequencesList):
+def get_move(board, player):
+    boardSize = len(board)
+    boardRange = boardSize * boardSize
+    while True:
+        answer = input(
+            "Please pick an unused space between 0 and " + str(boardRange-1) + ": ")
+        if answer.isdigit():
+            move = int(answer)
+            row = int(move / boardSize)
+            col = int(move % boardSize)
+            if move in range(boardRange) and board[row][col] == None:
+                break
+            elif move not in range(boardRange):
+                print("Choose a valid space.")
+            else:
+                print("Choose an unused space.")
+        else:
+            print("Please enter a valid number.")
+    return (row, col)
+
+
+def playGame(board, winningSequencesList):
     # while there is not a win or draw, then ask the player for the next move
     win = 0
     draw = 0
     count = 0
-    boardRange = boardSize * boardSize
     while win == 0 and draw == 0:  # =1 for win, =2 for draw, =0 to continue play
         printBoard(board)
         if count % 2 == 0:  # Even count is player X
             player = "X"
         else:  # Odd count is player O
             player = "O"
-        move = int(input("Player " + player +
-                   ": Enter number of space you want to place your piece: "))
-        row = int(move / boardSize)
-        col = int(move % boardSize)
-        while move not in range(boardRange) or board[row][col] != None:
-            move = int(
-                input("Please pick an unused space between 0 and " + str(boardRange-1) + ": "))
-            row = int(move / boardSize)
-            col = int(move % boardSize)
-        board[row][col] = player
+        move = get_move(board, player)
+        board[move[0]][move[1]] = player
         draw = checkForDraw(board)
         win = checkForWin(board, winningSequencesList)
         count = count + 1
@@ -145,7 +157,7 @@ while "y" in play.lower():
     boardSize = int(input("What size board do you want to play with? "))
     board = initializeBoard(boardSize)
     winningSequencesList = winningSequences(boardSize)
-    playGame(board, boardSize, winningSequencesList)
+    playGame(board, winningSequencesList)
     play = input("Would you like to play again? (Y/N) ")
 
 print("Thanks for playing")

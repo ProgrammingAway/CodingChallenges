@@ -45,10 +45,9 @@ def checkForWin(count):
             printBoard()
             if board[sequence[0]] == "X":
                 print("Player 'X' won!!")
-                return 1
             if board[sequence[0]] == "O":
                 print("Player 'O' won!!")
-                return 1
+            return 1
     return 0
 
 

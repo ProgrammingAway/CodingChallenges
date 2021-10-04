@@ -1,7 +1,6 @@
-# Tic Tac Toe
-# Build a game of Tic Tac Toe. I would suggest you start off building a two player version then if
-# you want a little extra challenge see if you can build a version where you get to challenge the
-# computer. (from https://ryanstutorials.net/programming-challenges/)
+# Tic Tac Toe V2
+# Another attempt at a Tic Tac Toe program challenge
+# (from https://robertheaton.com/2018/10/09/programming-projects-for-advanced-beginners-3-a/)
 
 play = input("Would you like to play Tic Tac Toe? (Y/N) ")
 

@@ -105,3 +105,54 @@ def checkForWin(board, winningSequencesList):
             return True
     return False
 </pre>
+
+Next I remove the section of the playGame function that gets the move from the user and add it into it's own funciton.  I do this so I can swap out this function for an AI function at some point in the future.  This function is as follows:
+
+<pre>
+def getMove(board, player):
+    boardSize = len(board)
+    boardRange = boardSize * boardSize
+    while True:
+        answer = input(
+            "Please pick an unused space between 0 and " + str(boardRange-1) + ": ")
+        if answer.isdigit():
+            move = int(answer)
+            row = int(move / boardSize)
+            col = int(move % boardSize)
+            if move in range(boardRange) and board[row][col] == None:
+                break
+            elif move not in range(boardRange):
+                print("Choose a valid space.")
+            else:
+                print("Choose an unused space.")
+        else:
+            print("Please enter a valid number.")
+    return (row, col)
+</pre>
+
+After creating the getMove function, that leaves the playGame function.  Here is what is needed for that function.
+
+<pre>
+def playGame(board, winningSequencesList):
+    # while there is not a win or draw, then ask the player for the next move
+    win = 0
+    draw = 0
+    count = 0
+    while win == 0 and draw == 0:  # =1 for win, =2 for draw, =0 to continue play
+        printBoard(board)
+        if count % 2 == 0:  # Even count is player X
+            player = "X"
+        else:  # Odd count is player O
+            player = "O"
+        move = getMove(board, player)
+        board[move[0]][move[1]] = player
+        draw = checkForDraw(board)
+        win = checkForWin(board, winningSequencesList)
+        count = count + 1
+    printBoard(board)
+    if draw:
+        print("The game is a draw!")
+    if win:
+        print("Player " + player + " won!")
+</pre>
+

@@ -2,24 +2,6 @@
 # Another attempt at a Tic Tac Toe program challenge
 # (from https://robertheaton.com/2018/10/09/programming-projects-for-advanced-beginners-3-a/)
 
-play = input("Would you like to play Tic Tac Toe? (Y/N) ")
-
-if "y" not in play.lower():
-    print("Ok, bye!")
-    exit(1)
-
-# Game Board:
-#
-# 0 | 1 | 2
-# ---------
-# 3 | 4 | 5
-# ---------
-# 6 | 7 | 8
-
-# board = [0, 1, 2, 3, 4, 5, 6, 7, 8]
-# winningSequences = ([0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 1, 2],
-#                     [3, 4, 5], [6, 7, 8], [0, 4, 8], [2, 4, 6])
-
 
 def initializeBoard(boardSize):
     # Creates a 2 dimentional martix of boardSize
@@ -151,6 +133,12 @@ def playGame(board, winningSequencesList):
     if win:
         print("Player " + player + " won!")
 
+
+play = input("Would you like to play Tic Tac Toe? (Y/N) ")
+
+if "y" not in play.lower():
+    print("Ok, bye!")
+    exit(1)
 
 while "y" in play.lower():
     boardSize = int(input("What size board do you want to play with? "))

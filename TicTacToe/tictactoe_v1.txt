@@ -1,0 +1,62 @@
+Tic Tac Toe Challenge (part 1)
+
+In order to get better at programming, I decided to find programming challenges online and track how I solve them here. After a quick search on Duck Duck Go, I found a set of challenges at Ryan’s Tutorials. The first on the list is a Tic Tac Toe game which states:
+
+    Build a game of Tic Tac Toe. I would suggest you start off building a two player version then if you want a little extra challenge see if you can build a version where you get to challenge the computer.
+
+I decided to do this challenge in Python since that is the language I’ve been using recently, but I do plan on attempting some challenges in different languages. I may also  do some challenges in multiple languages. So, if you are looking for the complete python code for this challenge, it is located in the github repository. However, I suggest you try it by yourself first, and then come back to look at my solution.
+
+I didn’t put too much thought into this challenge when I chose to do it, but I wanted these challenges to be fairly quick and therefore, text based. When I went to start typing code, I realized I would have to put some thought into how to play Tic Tac Toe in text form.
+
+I first started thinking about the data structure to hold the game board. Originally, I was thinking of creating a two-dimensional array since that would be most similar to an actual Tic Tac Toe game board. However, after a few lines of code I decided it would probably be easier to represent this in just a one-dimensional array. So I created an array for the game board that would originally hold the position number, but eventually will hold the player character when a play is made. I also created a list of arrays that represent winning sequences based on that board.
+
+Here are the global variables I set up:
+
+---
+
+So if you think of the board variable as defining the places on the board represented in the comments, then you can define the limited set of winning sequences.
+
+I then created a printBoard() function that does just what you think it does, prints out the game board:
+
+---
+
+I also wanted to create a function to check if the current move wins the game since this function would be called after every move. Since I plan on replacing the initial number in the board array with the player character, I need to test if all the indexes in the winning sequence equal the same character. Then if that character equals X, player X wins, otherwise player O wins. Here’s the code I came up with:
+
+---
+
+This code will return 1 if a player won, and 0 if the game is to continue.
+
+Finally I started creating code to play the game. Here is what I started with:
+
+---
+
+So while no one had won, we do the following:
+
+        print the board
+        choose the current player based on which play count it is (X for even count, O for odd count)
+        ask the player what position he wants to place his character
+        next we check to make sure that position is a valid position and one that is not already chosen
+        if it is not valid, ask the question again
+        after a valid position is chosen, place the player character in that position in the array
+        check if that play was a winning play
+        increment the count and repeat the while command
+
+This code worked, unless if no one won. We need to handle the possibility of a draw. The way I handled this problem is to use the count variable that tracks the number of plays. The maximum number of plays for a Tic Tac Toe game is 9. If no one has won after 9 turns (or 8 if counting from 0), then the game is a draw. So this requires us to send the count variable to the checkForWin() function and make the following changes:
+
+---
+
+Be sure to change the call to checkForWin() in the while function to send the count variable.
+
+Now the game worked, but there was no way to continue to play the game without running the program again. In order to play the game multiple times, we would need to put that while loop into it’s own function. So I created the playGame() funciton:
+
+---
+
+After creating the playGame() function, the complete code would be as follows:
+
+---
+
+So that is how I solved the Tic Tac Toe programming challenge in Python. Let me know if you solved it in a different way in the comments below.
+
+As you leave, please enjoy this picture of one of the beautiful beaches of Panama, Red Frog Beach.
+
+-Brian

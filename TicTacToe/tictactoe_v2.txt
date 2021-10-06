@@ -1,0 +1,41 @@
+Tic Tac Toe Challenge (part 2)
+
+Shortly after writing a Tic Tac Toe program in python for one of my programming challenges, I ran across a new Tic Tac Toe programming challenge from Robert Heaton. While looking through his challenge, I decided my program was too simple and needed to be updated with better written functions. The functions in my original Tic Tac Toe program were hardcoded in some ways and needed to be more abstracted. Functions need to do just one thing and need to be able to accomodate potential changes in the future without re-writing the function.
+
+So the first thing I did was make the game board size a variable that can be controlled by the user. Now we aren’t stuck with a 3×3 board, however, this would require us to re-write most of the functions since they were hardcoded to use a 3×3 board. The first thing I needed to do is to create a initializeBoard() function that created a 2 dimensional array based off the boardSize variable.
+
+---
+
+The next thing I did was update the printBoard() function to use this new board:
+
+---
+
+I will have to put some practical limit on the board size to keep the game managable, but I wanted the printBoard() function to be able to handle a large size board. I added conditionals that tested if there are more than 10 or 100 positions on the board so I can add proper spacing and everything would line up. But I did think testing anything bigger than that would make the board too big and make the game too hard to play. However, I may be able to accomplish this by using some print formatting. I will look into that.
+
+I could have used the same method of checking for a draw as my old program, but I decided to give it it’s dedicated function and actually test for any empty spaces on the board. Hopefully this is more robust.
+
+---
+
+Next I will update the checkForWin() function. Since the size of the board is parameterized, I cannot store a list of all winning combinations before hand. I will need to create a list dynamically based off the size chosen by the user. In order to not calculate this every time I check for a win, I will call a function after the board size is chosen and send the resulting list to the checkForWin() function. So first, this is the function to create all possible winning combinations:
+
+---
+
+Now this is the resulting checkForWin() function:
+
+---
+
+Next I remove the section of the playGame() function that gets the move from the user and add it into it’s own function. I do this so I can swap out this function for an AI function at some point in the future. This function is as follows:
+
+---
+
+After creating the getMove() function, that leaves the playGame() function. Here is what is needed for that function:
+
+---
+
+So finally, here is the final version of the code:
+
+---
+
+So that is how I improved on my solution to the Tic Tac Toe programming challenge in Python. Let me know if you solved it in a different way in the comments below.
+
+Brian
